@@ -3,11 +3,11 @@ import 'package:path/path.dart';
 import 'package:templatesqlite/models/barang.dart';
 
 class DatabaseHelper {
-  static final DatabaseHelper instance = DatabaseHelper.internal();
-  factory DatabaseHelper() => instance;
+  static final DatabaseHelper instance = DatabaseHelper.internal(); //membuat instance singleton dari class DatabaseHelper| static berarti properti ini milik class, bukan objek.| memanggil constructor internal yang ada di bawah.
+  factory DatabaseHelper() => instance; //factory constructor, yaitu konstruktor khusus yang tidak selalu membuat objek baru, tapi bisa mengembalikan objek yang sudah ada.| setiap kali DatabaseHelper() dipanggil, dia akan mengembalikan objek instance yang sudah dibuat sebelumnya.| Tujuannya agar hanya ada satu instance dari DatabaseHelper (pola desain Singleton).
 
-  DatabaseHelper.internal();
-  static Database? _database;
+  DatabaseHelper.internal(); //named constructor yang digunakan hanya secara internal untuk membuat objek sekali saja. dgunakn utk membuat database saat peryama kali buka aplikasi 
+  static Database? _database; //Digunakan untuk menyimpan koneksi database.| Biasanya nanti akan diinisialisasi(dibuat) sekali lalu digunakan berulang kali
 
   Future<Database> get database async {
     if (_database != null) return _database!;
